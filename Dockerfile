@@ -8,6 +8,6 @@ RUN pip install python-telegram-bot
 RUN pip install beautifulsoup4
 RUN pip install bs4
 
-CMD [ "python", "./bot.py" ]
+CMD [ "python3", "./bot.py" ]
 
 
