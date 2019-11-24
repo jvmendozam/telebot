@@ -42,6 +42,27 @@ def my_ip(bot,update):
         text="La ip es : " + ip 
     )
 
+def currency(bot,update,args):
+
+    URL = "https://api.exchangeratesapi.io/latest"
+    r = requests.get(url = URL) 
+    data = r.json() 
+
+    num = 1
+    if (len(args) >= 1 and args[0].isdigit()): num = float(args[0])
+    result = data["rates"]["USD"] * num
+
+    bot.send_message(
+        chat_id=update.message.chat_id,
+        text="Value euros for dollars : " + str(result) 
+    )
+    
+def my_handler(bot, update, args):
+    for arg in args:
+       print(arg)
+
+
+
 
 if __name__ == '__main__':
 
@@ -51,6 +72,7 @@ if __name__ == '__main__':
     dispatcher.add_handler(CommandHandler('start', start))
     dispatcher.add_handler(CommandHandler('gym', gym))
     dispatcher.add_handler(CommandHandler('my_ip', my_ip))
-    
+    dispatcher.add_handler(CommandHandler('currency', currency,pass_args=True))
+
     updater.start_polling()
     updater.idle()
